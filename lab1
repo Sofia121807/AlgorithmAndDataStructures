@@ -1,0 +1,61 @@
+namespace lab1
+{
+    internal class Program
+    {
+        // Запускает игру и управляет игровым циклом
+        static void Main(string[] args)
+        {
+            // Ввод переменных
+            int min = 0;
+            int max = 0;
+            int count = 0;
+            int countGame = 0;
+
+            Random rnd = new Random();
+            char answer = 'Y';
+
+            // Основной цикл игры (играем пока пользователь отвечает 'Y')
+            do
+            {
+                // Генерируем случайное число
+                int rndnumber = rnd.Next(0, 100);
+                int counter = 0;
+                int attempt = 0;
+                while (true)
+                {
+                    counter++;
+                    Console.WriteLine("input number from [1;100]");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (!int.TryParse(Console.ReadLine(), out attempt)
+                             attempt > 100  attempt < 0) Console.WriteLine("input number from [1;100]");
+                        else break;
+                    if (i == 2)
+                    {
+                        Console.WriteLine("you are stypid");
+                        return;
+                    }
+                }
+                if (rndnumber < attempt)
+                    Console.WriteLine("you number is greater");
+                else if (rndnumber > attempt)
+                    Console.WriteLine("Your number is less");
+                else
+                {
+                    Console.WriteLine("Your are win!");
+                    if (min == 0 || min > counter) min = counter;
+                    max = max < counter ? counter : max;
+                    countGame++;
+                    counter += counter;
+                    break;
+                }
+            }
+                Console.WriteLine("Do you want play again?");
+            answer = Convert.ToChar(Console.Read());
+
+        }while (answer == 'Y');
+
+            Console.WriteLine($"min={min} max={max} avg={(double)count / countGame}");
+        }
+    }
+}
